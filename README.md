@@ -2,6 +2,9 @@
 
 Hackathon EPITNET 2026 — Équipe : Kenneth, Thed, Primaëlle.
 
+Le cahier des charges complet et la doctrine produit sont dans
+[`CAHIER_DES_CHARGES.md`](./CAHIER_DES_CHARGES.md).
+
 GuardSite AI génère un site vitrine professionnel à partir d'un bref utilisateur :
 le moteur IA (Gemini) sélectionne le template local le plus adapté, rédige les
 contenus contextualisés, puis injecte chirurgicalement le tout dans le template
