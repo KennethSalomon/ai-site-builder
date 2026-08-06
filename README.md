@@ -46,16 +46,41 @@ npm run dev
 ## Déploiement de la plateforme sur Vercel
 
 Le build produit un artefact compatible Vercel (`defaultPreset: "vercel"` dans
-`vite.config.ts`). Les étapes de mise en production :
+`vite.config.ts`). La commande qui fait tout — build, injection des clés IA
+dans le projet Vercel, déploiement réel :
 
 ```sh
-npm run build        # génère l'output prêt pour Vercel
-npx vercel --prod     # confie le déploiement à Vercel (connexion) — ou via `vercel deploy --prebuilt`
+npm run vercel:deploy
 ```
 
+Sous le capot : `npm run build` (artefact `.vercel/output`) → `npm run vercel:sync`
+(synchronise les variables du `.env` dans le projet Vercel) → `npm run deploy`
+(`nitro deploy --prebuilt`). Si le projet n'existe pas encore chez Vercel, il
+est créé au nom du package puis reçoit les clés **avant** le déploiement, de
+sorte que Gemini (ou Grok) est actif dès le premier build déployé.
+
+**Pourquoi cette étape ?** Vercel n'a pas accès à votre `.env` local : sans
+synchronisation, le déploiement ne possède aucune clé et le moteur IA retombe
+sur son fallback déterministe (aucune génération IA réelle). Les variables sont
+stockées chiffrées côté Vercel (`type: encrypted`, env production + preview +
+dev).
+
+Utilisation avancée :
+
+```sh
+node scripts/sync-vercel-env.mjs --dry-run          # prévisualise la synchro
+node scripts/sync-vercel-env.mjs --project=<nom>    # viser un autre projet Vercel
+npm run deploy                                      # déployer seul (VERCEL_TOKEN dans l'env)
+```
+
+Toute modification d'environnement n'est appliquée qu'au prochain déploiement —
+`npm run vercel:deploy` la prend en compte automatiquement (ordre build → env →
+deploy).
+
 Variables d'environnement à configurer côté Vercel : `GEMINI_API_KEY` (LLM),
-`VERCEL_TOKEN` (mises en ligne des productions), et optionnellement
-`RATE_LIMIT_SECRET` (signature des sessions, stable entre redéploiements).
+`VERCEL_TOKEN` (mises en ligne des productions depuis la plateforme), et
+optionnellement `RATE_LIMIT_SECRET` (signature des sessions, stable entre
+redéploiements).
 
 ## Fonctionnalités
 

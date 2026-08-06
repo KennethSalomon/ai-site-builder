@@ -14,7 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "deploy": "nitro deploy --prebuilt"
+    "deploy": "nitro deploy --prebuilt",
+    "vercel:sync": "node scripts/sync-vercel-env.mjs",
+    "vercel:deploy": "node scripts/deploy-vercel.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.15.0",
