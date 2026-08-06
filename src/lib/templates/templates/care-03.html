@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{{TAGLINE}}" />
+    <title>{{SITE_NAME}} — {{TAGLINE}}</title>
+    <style>
+      :root {
+        --primary: {{PRIMARY}};
+        --primary-soft: {{PRIMARY_SOFT}};
+        --bg: {{DARK_BG}};
+        --ink: #12232e;
+        --muted: #5d7280;
+        --border: rgba(18, 35, 46, 0.1);
+        --radius: 14px;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: system-ui, sans-serif; color: var(--ink); background: #fff; line-height: 1.65; }
+      .gs-container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+      .gs-nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+      .gs-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+      .gs-brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.02em; text-decoration: none; color: var(--ink); }
+      .gs-logo { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 8px; background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 700; font-family: system-ui, sans-serif; flex-shrink: 0; }
+      .gs-nav-links { display: flex; gap: 22px; }
+      .gs-nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+      .gs-nav-links a:hover { color: var(--primary); }
+      .gs-hero { padding: 90px 0 60px; text-align: center; background: linear-gradient(180deg, var(--primary-soft), #fff); }
+      .gs-hero h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.03em; line-height: 1.15; }
+      .gs-hero .gs-tagline { margin: 16px auto 0; max-width: 620px; color: var(--muted); }
+      .gs-hero .gs-btn { display: inline-block; margin-top: 26px; background: var(--primary); color: #fff; padding: 13px 28px; border-radius: 12px; text-decoration: none; font-weight: 600; }
+      .gs-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+      .gs-heading { font-size: 1.4rem; letter-spacing: -0.02em; margin-bottom: 12px; }
+      .gs-body { color: var(--muted); max-width: 720px; }
+      .gs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 22px; }
+      .gs-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; background: #fff; }
+      .gs-card h3 { font-size: 1rem; margin-bottom: 6px; }
+      .gs-card p { color: var(--muted); font-size: 0.85rem; }
+      .gs-hours { margin-top: 18px; display: grid; gap: 8px; max-width: 420px; }
+      .gs-hours div { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 0.9rem; }
+      .gs-social { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+      .gs-social a { font-size: 0.8rem; font-weight: 600; text-decoration: none; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 10px; }
+      .gs-footer { text-align: center; padding: 28px 0; color: var(--muted); font-size: 0.8rem; }
+      .gs-chatbot { position: fixed; right: 20px; bottom: 20px; z-index: 100; }
+      .gs-chatbot button { font-family: inherit; background: var(--primary); color: #fff; border: 0; padding: 14px 20px; border-radius: 12px; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+      @media (max-width: 640px) { .gs-nav-links { display: none; } }
+    </style>
+  </head>
+  <body>
+    <nav class="gs-nav">
+      <div class="gs-container gs-nav-inner">
+        <a class="gs-brand" href="#top">{{LOGO}}<span>{{SITE_NAME}}</span></a>
+        <div class="gs-nav-links">
+          <a href="#specialties">Spécialités</a><a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+    <header class="gs-hero" id="top">
+      <div class="gs-container">
+        <h1>{{TAGLINE}}</h1>
+        <p class="gs-tagline">{{ABOUT_SHORT}}</p>
+        <a class="gs-btn" href="#contact">{{CTA}}</a>
+      </div>
+    </header>
+    <main>
+      {{SECTIONS}} {{ARTICLES}}
+      <section class="gs-section" id="contact">
+        <div class="gs-container">
+          <h2 class="gs-heading">Contact &amp; Horaires</h2>
+          <div class="gs-hours">
+            <div><span>Lundi – Vendredi</span><span>08h00 – 18h00</span></div>
+            <div><span>Samedi</span><span>09h00 – 13h00</span></div>
+          </div>
+          {{SOCIAL}}
+        </div>
+      </section>
+    </main>
+    <footer class="gs-footer">© {{YEAR}} {{SITE_NAME}} — Site généré par GuardSite AI.</footer>
+    {{CHATBOT}}
+  </body>
+</html>

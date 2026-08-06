@@ -1,0 +1,126 @@
+[
+  {
+    "id": "metric-card",
+    "category": "dashboard_module",
+    "framework": "TailwindCSS",
+    "name": "Carte métrique",
+    "description": "Carte de suivi d'un indicateur clé (libellé, valeur, statut, tendance).",
+    "keywords": ["kpi", "metrique", "indicateur", "statistique", "chiffre", "revenue", "revenu"],
+    "sectors": ["Commerciale", "Services", "Electronique"],
+    "html_code": "<div class='rounded-xl border border-slate-200 bg-white p-5 shadow-sm'> <div class='flex items-center justify-between'> <span class='text-sm font-medium text-slate-500'>{{TITLE}}</span> <span class='rounded-full px-2 py-0.5 text-xs font-medium {{STATUS_CLASS}}'>{{STATUS}}</span> </div> <p class='mt-2 text-3xl font-semibold text-slate-900'>{{METRIC_VALUE}}</p> <p class='mt-1 text-xs text-slate-400'>{{DELTA}}</p> </div>",
+    "variables_attendues": ["title", "metric_value", "status", "status_class", "delta"]
+  },
+  {
+    "id": "progress-card",
+    "category": "dashboard_module",
+    "framework": "TailwindCSS",
+    "name": "Carte de progression",
+    "description": "Barre de progression avec libellé et pourcentage.",
+    "keywords": ["progression", "progress", "avancement", "barre", "objectif", "objectif"],
+    "sectors": ["Commerciale", "Services", "Alimentation"],
+    "html_code": "<div class='rounded-xl border border-slate-200 bg-white p-5 shadow-sm'> <div class='flex items-center justify-between'> <span class='text-sm font-medium text-slate-500'>{{LABEL}}</span> <span class='text-sm font-semibold text-slate-900'>{{PERCENT}}%</span> </div> <div class='mt-3 h-2 w-full overflow-hidden rounded-full bg-slate-100'> <div class='h-full rounded-full bg-blue-600' style='width:{{PERCENT}}%'></div> </div> <p class='mt-2 text-xs text-slate-400'>{{DETAIL}}</p> </div>",
+    "variables_attendues": ["label", "percent", "detail"]
+  },
+  {
+    "id": "activity-row",
+    "category": "dashboard_module",
+    "framework": "TailwindCSS",
+    "name": "Ligne d'activité",
+    "description": "Élément de liste d'activité récente avec statut et horodatage.",
+    "keywords": ["activite", "activity", "journal", "historique", "liste", "notification"],
+    "sectors": ["Services", "Commerciale"],
+    "html_code": "<li class='flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-slate-50'> <span class='grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-slate-100 text-base'>{{ICON}}</span> <span class='min-w-0 flex-1'> <span class='block truncate text-sm font-medium text-slate-900'>{{TITLE}}</span> <span class='block truncate text-xs text-slate-400'>{{TIME}}</span> </span> <span class='shrink-0 rounded-full px-2 py-0.5 text-xs font-medium {{STATUS_CLASS}}'>{{STATUS}}</span> </li>",
+    "variables_attendues": ["icon", "title", "time", "status", "status_class"]
+  },
+  {
+    "id": "contact-form",
+    "category": "form",
+    "framework": "TailwindCSS",
+    "name": "Formulaire de contact",
+    "description": "Formulaire de contact classique (nom, e-mail, message, bouton).",
+    "keywords": ["contact", "formulaire", "message", "email", "form"],
+    "sectors": ["Services", "Commerciale", "Alimentation"],
+    "html_code": "<form class='space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm'> <h3 class='text-lg font-semibold text-slate-900'>{{HEADING}}</h3> <div> <label class='block text-sm font-medium text-slate-700'>{{NAME_LABEL}}</label> <input type='text' placeholder='{{NAME_PLACEHOLDER}}' class='mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500' /> </div> <div> <label class='block text-sm font-medium text-slate-700'>{{EMAIL_LABEL}}</label> <input type='email' placeholder='{{EMAIL_PLACEHOLDER}}' class='mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500' /> </div> <div> <label class='block text-sm font-medium text-slate-700'>{{MESSAGE_LABEL}}</label> <textarea rows='3' placeholder='{{MESSAGE_PLACEHOLDER}}' class='mt-1 w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500'></textarea> </div> <button type='submit' class='w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700'>{{SUBMIT_LABEL}}</button> </form>",
+    "variables_attendues": [
+      "heading",
+      "name_label",
+      "name_placeholder",
+      "email_label",
+      "email_placeholder",
+      "message_label",
+      "message_placeholder",
+      "submit_label"
+    ]
+  },
+  {
+    "id": "booking-form",
+    "category": "form",
+    "framework": "TailwindCSS",
+    "name": "Formulaire de rendez-vous",
+    "description": "Formulaire de prise de rendez-vous (service, date, téléphone).",
+    "keywords": ["rendez-vous", "reservation", "booking", "rdv", "creneau"],
+    "sectors": ["Médecine", "Beauté", "Services"],
+    "html_code": "<form class='space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm'> <h3 class='text-lg font-semibold text-slate-900'>{{HEADING}}</h3> <div> <label class='block text-sm font-medium text-slate-700'>{{SERVICE_LABEL}}</label> <select class='mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500'> <option>{{SERVICE_OPTION}}</option> </select> </div> <div> <label class='block text-sm font-medium text-slate-700'>{{DATE_LABEL}}</label> <input type='date' class='mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500' /> </div> <div> <label class='block text-sm font-medium text-slate-700'>{{PHONE_LABEL}}</label> <input type='tel' placeholder='{{PHONE_PLACEHOLDER}}' class='mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 outline-none focus:border-blue-500' /> </div> <button type='submit' class='w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700'>{{SUBMIT_LABEL}}</button> </form>",
+    "variables_attendues": [
+      "heading",
+      "service_label",
+      "service_option",
+      "date_label",
+      "phone_label",
+      "phone_placeholder",
+      "submit_label"
+    ]
+  },
+  {
+    "id": "product-card",
+    "category": "product",
+    "framework": "TailwindCSS",
+    "name": "Carte produit",
+    "description": "Carte produit avec visuel, prix, badge et bouton d'action.",
+    "keywords": ["produit", "product", "article", "boutique", "vente", "catalogue"],
+    "sectors": ["Mode", "Electronique", "Alimentation"],
+    "html_code": "<article class='overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm'> <div class='relative h-40 w-full bg-slate-100'> <img src='{{IMAGE_URL}}' alt='{{TITLE}}' class='h-full w-full object-cover' /> <span class='absolute left-3 top-3 rounded-full px-2 py-0.5 text-xs font-medium {{BADGE_CLASS}}'>{{BADGE}}</span> </div> <div class='p-4'> <h3 class='text-sm font-semibold text-slate-900'>{{TITLE}}</h3> <p class='mt-1 line-clamp-2 text-xs text-slate-500'>{{DESCRIPTION}}</p> <div class='mt-3 flex items-center justify-between'> <span class='text-lg font-bold text-slate-900'>{{PRICE}}</span> <button type='button' class='rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700'>{{CTA}}</button> </div> </div> </article>",
+    "variables_attendues": [
+      "image_url",
+      "title",
+      "description",
+      "price",
+      "badge",
+      "badge_class",
+      "cta"
+    ]
+  },
+  {
+    "id": "testimonial-card",
+    "category": "content",
+    "framework": "TailwindCSS",
+    "name": "Carte témoignage",
+    "description": "Citation client avec auteur, rôle et note.",
+    "keywords": ["temoignage", "testimonial", "avis", "citation", "client", "review"],
+    "sectors": ["Services", "Beauté", "Alimentation"],
+    "html_code": "<figure class='rounded-xl border border-slate-200 bg-white p-6 shadow-sm'> <div class='text-sm text-amber-400'>{{STARS}}</div> <blockquote class='mt-3 text-sm leading-relaxed text-slate-600'>« {{QUOTE}} »</blockquote> <figcaption class='mt-4 flex items-center gap-3'> <span class='grid h-10 w-10 place-items-center rounded-full bg-slate-100 text-sm font-semibold text-slate-700'>{{INITIALS}}</span> <span> <span class='block text-sm font-semibold text-slate-900'>{{AUTHOR}}</span> <span class='block text-xs text-slate-400'>{{ROLE}}</span> </span> </figcaption> </figure>",
+    "variables_attendues": ["stars", "quote", "initials", "author", "role"]
+  },
+  {
+    "id": "pricing-card",
+    "category": "content",
+    "framework": "TailwindCSS",
+    "name": "Carte tarif",
+    "description": "Offre avec prix, liste de fonctionnalités et bouton.",
+    "keywords": ["tarif", "prix", "pricing", "offre", "abonnement", "forfait"],
+    "sectors": ["Services", "Commerciale"],
+    "html_code": "<div class='rounded-xl border border-slate-200 bg-white p-6 shadow-sm'> <h3 class='text-sm font-semibold text-slate-900'>{{PLAN}}</h3> <p class='mt-2 text-3xl font-bold text-slate-900'>{{PRICE}}<span class='text-sm font-normal text-slate-400'>{{PERIOD}}</span></p> <ul class='mt-4 space-y-2'> {{FEATURES_LIST}} </ul> <button type='button' class='mt-5 w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700'>{{CTA}}</button> </div>",
+    "variables_attendues": ["plan", "price", "period", "features_list", "cta"]
+  },
+  {
+    "id": "cta-banner",
+    "category": "content",
+    "framework": "TailwindCSS",
+    "name": "Bannière d'appel à l'action",
+    "description": "Grande bannière avec titre, sous-titre et bouton.",
+    "keywords": ["appel", "action", "cta", "banniere", "banner", "bouton"],
+    "sectors": ["Alimentation", "Médecine", "Beauté"],
+    "html_code": "<section class='flex flex-col items-center gap-4 rounded-2xl bg-blue-600 px-6 py-12 text-center sm:py-16'> <h2 class='max-w-2xl text-2xl font-bold text-white sm:text-3xl'>{{HEADING}}</h2> <p class='max-w-xl text-sm text-blue-100 sm:text-base'>{{SUBTEXT}}</p> <button type='button' class='rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-blue-600 hover:bg-blue-50'>{{BUTTON_LABEL}}</button> </section>",
+    "variables_attendues": ["heading", "subtext", "button_label"]
+  }
+]
