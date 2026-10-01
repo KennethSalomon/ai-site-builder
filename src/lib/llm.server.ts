@@ -24,6 +24,12 @@ import { logger } from "./logger";
 /** Garde-fou : on ne laisse jamais l'appel pendre (défaut réseau infini). */
 const REQUEST_TIMEOUT_MS = 30_000;
 
+/** Nombre maximal de tentatives pour un même contenu (erreurs transitoires). */
+const MAX_ATTEMPTS = 3;
+
+/** Délai initial du backoff exponentiel entre deux tentatives (ms). */
+const BACKOFF_BASE_MS = 700;
+
 const DEFAULT_MODELS: Record<"gemini" | "grok", string> = {
   gemini: "gemini-2.5-flash",
   grok: "grok-3",
@@ -77,10 +83,27 @@ export async function generateJson(system: string, user: string): Promise<string
   }
 
   try {
-    const text =
-      provider === "grok"
-        ? await generateWithGrok(system, user)
-        : await generateWithGemini(system, user);
+    let text = "";
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+      if (attempt > 1) {
+        const wait = BACKOFF_BASE_MS * 2 ** (attempt - 2);
+        await new Promise((resolve) => setTimeout(resolve, wait));
+      }
+      try {
+        text =
+          provider === "grok"
+            ? await generateWithGrok(system, user)
+            : await generateWithGemini(system, user);
+        break;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        if (attempt < MAX_ATTEMPTS && isRetriable(message)) {
+          logger.warn(`Moteur IA ${provider}, tentative ${attempt} interrompue : ${message}`);
+          continue;
+        }
+        throw err;
+      }
+    }
     if (!text.trim()) {
       throw new Error("Réponse vide du moteur IA.");
     }
@@ -90,6 +113,23 @@ export async function generateJson(system: string, user: string): Promise<string
     logger.error(`Moteur IA ${provider} indisponible : ${lastAiFailure}`);
     return null;
   }
+}
+
+/** Erreur vraisemblablement transitoire → digne d'une nouvelle tentative. */
+function isRetriable(message: string): boolean {
+  const m = message.toLowerCase();
+  return (
+    m.includes("429") ||
+    m.includes("quota") ||
+    m.includes("resource_exhausted") ||
+    m.includes("503") ||
+    m.includes("unavailable") ||
+    m.includes("timeout") ||
+    m.includes("deadline") ||
+    m.includes("etimedout") ||
+    m.includes("econnreset") ||
+    m.includes("fetch failed")
+  );
 }
 
 /** Appel Grok (xAI) — endpoint OpenAI-compatible, JSON imposé côté API. */
