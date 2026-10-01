@@ -22,6 +22,14 @@ dist-ssr
 .env.*
 !.env.example
 
+# Captures QA / artefacts de démo (jamais versionnés)
+/*.png
+/brag-output/
+/.playwright-mcp/
+
+# Skill brag (15 Mo d'assets audio — jamais versionnés)
+/.opencode/skills/brag/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
